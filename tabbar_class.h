@@ -4,6 +4,7 @@
 #include "dialog.h"
 #include "add_plot_dialoag.h"
 #include "parameter_window.h"
+#include "global.h"
 
 #include <QList>
 #include <QWidget>
@@ -11,6 +12,7 @@
 #include <QMdiSubWindow>
 #include <QString>
 #include <QWidget>
+#include <QList>
 
 
 class tabbar_class : public QWidget
@@ -33,7 +35,7 @@ public:
     QGridLayout *tab_widget_layout;
 
     void addPlotWindow(QString variable_name);
-    void addVariableWindow(QStringList *variable_list);
+    void addVariableWindow(QList<data_type_variable> vari_list);
     void addParameterWindow(QStringList *variable_list);
     void setVariableValue(int value);
     QString getTabbarName();

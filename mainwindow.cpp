@@ -37,9 +37,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     variable_list = new QStringList();
 
-    new_list->append("u16CurPhaseURaw");
-    new_list->append("u16CurPhaseVRaw");
-    new_list->append("u16CurPhaseWRaw");
+    QList<data_type_variable> vari_list_1, vari_list_2;
+
+    vari_list_1.append({"u16CurPhaseL1Raw", 15.2, "[A]", "uint16_t", 1.0});
+    vari_list_1.append({"u16CurPhaseL2Raw", 11.2, "[A]", "uint16_t", 1.0});
+    vari_list_1.append({"u16CurPhaseL3Raw", 13.2, "[A]", "uint16_t", 1.0});
+
+    vari_list_2.append({"u16VoltPhaseL1Raw", 15.2, "[V]", "uint16_t", 1.0});
+    vari_list_2.append({"u16VoltPhaseL2Raw", 11.2, "[V]", "uint16_t", 1.0});
+    vari_list_2.append({"u16VoltPhaseL3Raw", 13.2, "[V]", "uint16_t", 1.0});
 
     tabbar_var.append(new tabbar_class(this, "System"));
     tabbar_var.append(new tabbar_class(this, "Phasecurrent"));
@@ -52,7 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     tabbar_class *temp = tabbar_var.at(0);
-    temp->addVariableWindow(new_list);
+    temp->addVariableWindow(vari_list_1);
+    temp->addVariableWindow(vari_list_2);
+
     temp->addParameterWindow(new_list);
     temp->addPlotWindow("f32CurPhaseL1");
 
@@ -147,12 +155,10 @@ void MainWindow::readData()
     if (tabbar_var.length() > 0)
     {
         tabbar_class *temp = tabbar_var.at(0);
-        temp->setVariableValue(result_readData.at(0));
+        temp->setVariableValue(result_readData.at(19));
     }
-
+    progressbar->setValue(result_readData.at(0));
 }
-
-
 
 void MainWindow::on_button1_clicked()
 {

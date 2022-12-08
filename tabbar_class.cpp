@@ -35,11 +35,11 @@ void tabbar_class::addPlotWindow(QString variable_name)
     mdi_area->addSubWindow(plot_dialoag_1.at(0));
 }
 
-void tabbar_class::addVariableWindow(QStringList *variable_list)
+void tabbar_class::addVariableWindow(QList<data_type_variable> vari_list)
 {
-    dialog_1.append(new Dialog(this, "Measure Window", variable_list));
+    dialog_1.append(new Dialog(this, "Measurement Window", vari_list));
 
-    mdi_area->addSubWindow(dialog_1.at(0));
+    mdi_area->addSubWindow(dialog_1.at(dialog_1.length()-1));
 }
 
 void tabbar_class::addParameterWindow(QStringList *variable_list)
@@ -52,6 +52,13 @@ void tabbar_class::addParameterWindow(QStringList *variable_list)
 void tabbar_class::setVariableValue(int value)
 {
     Dialog *foo = dialog_1.at(0);
+
+
+    for (quint8 i = 0; i < dialog_1.length(); i++ )
+    {
+        Dialog *foo = dialog_1.at(i);
+        foo->setValue(value);
+    }
 
     foo->setValue(value);
 }

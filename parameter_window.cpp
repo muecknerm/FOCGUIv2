@@ -58,10 +58,6 @@ Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QString
 }
 
 
-
-
-
-
 Parameter_window::~Parameter_window()
 {
 }

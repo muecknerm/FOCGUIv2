@@ -5,25 +5,29 @@
 #include <QVector>
 #include <Qlist.h>
 
-Dialog::Dialog(QWidget *parent, QString windowTitle, QStringList *variable_list) :
+
+Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> vari_list) :
     QDialog(parent)
 {
     this->setWindowTitle(windowTitle);
 
     QGridLayout *layout_1 = new QGridLayout();
 
-    for (int i = 0; i < variable_list->length(); ++i)
+    for (int i = 0; i < vari_list.length(); ++i)
     {
         labels_name << new QLabel(this);
         labels_value << new QLabel(this);
         labels_unit << new QLabel(this);
     }
 
-    for (int i = 0; i < variable_list->length(); ++i)
+    for (int i = 0; i < vari_list.length(); ++i)
     {
-        labels_name.at(i)->setText(variable_list->at(i));
+
+        data_type_variable foo = vari_list.at(i);
+
+        labels_name.at(i)->setText(foo.variable_name);
         labels_value.at(i)->setText("0.0");
-        labels_unit.at(i)->setText("[rpm]");
+        labels_unit.at(i)->setText(foo.variable_unit);
 
         labels_name.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         labels_value.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -38,7 +42,7 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QStringList *variable_list)
         layout_1->setContentsMargins(0,0,0,0);
     }
 
-    for (int i = 0; i < variable_list->length(); ++i)
+    for (int i = 0; i < vari_list.length(); ++i)
     {
         layout_1->addWidget(labels_name.at(i),i,0);
         layout_1->addWidget(labels_value.at(i),i,1);
@@ -47,7 +51,7 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QStringList *variable_list)
 
     setLayout(layout_1);
 
-    setMinimumHeight(25 * variable_list->length());
+    setMinimumHeight(25 * vari_list.length());
 
     setMinimumWidth(400);
 

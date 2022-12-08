@@ -4,6 +4,7 @@
 #include "dialog.h"
 #include "add_plot_dialoag.h"
 #include "tabbar_class.h"
+#include "global.h"
 
 #include <QMainWindow>
 #include <QMenu>
@@ -77,7 +78,7 @@ private:
     /* configure application */
     bool ui_connected;
     serial_thread *port;
-    QList<int16_t> result_readData;
+    QVector<int16_t> result_readData;
 
 private slots:
     void on_button1_clicked();

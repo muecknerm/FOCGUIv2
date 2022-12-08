@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QByteArray>
 #include <QList>
+#include <QVector>
 
 class serial_thread:public QObject
 {
@@ -14,7 +15,7 @@ class serial_thread:public QObject
 private:
     QSerialPort *serialPort;
     QByteArray m_readData;
-    QList<int16_t> result_readData;
+    QVector<int16_t> result_readData;
     //QList<QSerialPortInfo> list;
 
 private slots:
@@ -27,7 +28,7 @@ public:
     serial_thread();
     void open_serial();
     void close_serial();
-    QList<int16_t> getReadData();
+    QVector<int16_t> getReadData();
 
 
 };

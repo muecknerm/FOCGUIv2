@@ -36,6 +36,7 @@ HEADERS += \
     add_plot_dialoag.h \
     add_variable_dialog.h \
     dialog.h \
+    global.h \
     mainwindow.h \
     parameter_window.h \
     serial_thread.h \

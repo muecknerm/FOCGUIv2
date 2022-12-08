@@ -9,11 +9,10 @@ serial_thread::serial_thread()
     serialPort->setBaudRate(QSerialPort::Baud115200);
     serialPort->setPortName("COM9");
 
-   // result_readData = new QList<int16_t>();
-
-    result_readData.append(0);
-    result_readData.append(0);
-    result_readData.append(0);
+    for (quint8 i = 0; i < 25 ; i++)
+    {
+        result_readData.append(0);
+    }
 
     connect(serialPort, SIGNAL(readyRead()), this, SLOT(handleReadyRead()));
 }
@@ -37,11 +36,15 @@ void serial_thread::handleReadyRead()
     {
         if ((m_readData.at(0) == '#') && (m_readData.at(1) == '#') )
         {
-            result_readData[0] = ((quint16) m_readData.at(36) << 8) | ((quint8) m_readData.at(37));
-            result_readData[1] = ((quint16) m_readData.at(38) << 8) | ((quint8) m_readData.at(39));
-            result_readData[2] = ((quint16) m_readData.at(40) << 8) | ((quint8) m_readData.at(41));
 
-            qDebug() << result_readData[0];
+            for (quint8 i = 0; i < 25 ; i++)
+            {
+                 result_readData[i] = ((quint16) m_readData.at(i*2 + 2) << 8) | ((quint8) m_readData.at(i*2+1 + 2));
+            }
+
+            qDebug() << result_readData[0] << "[/]"
+                     << result_readData[18]<< "[A]"
+                     << result_readData[19]<< "[A]";
         }
         m_readData.clear();
 
@@ -49,7 +52,7 @@ void serial_thread::handleReadyRead()
     }
 }
 
-QList<int16_t> serial_thread::getReadData()
+QVector<int16_t> serial_thread::getReadData()
 {
     return result_readData;
 }
