@@ -39,13 +39,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     QList<data_type_variable> vari_list_1, vari_list_2;
 
-    vari_list_1.append({"u16CurPhaseL1Raw", 15.2, "[A]", "uint16_t", 1.0});
-    vari_list_1.append({"u16CurPhaseL2Raw", 11.2, "[A]", "uint16_t", 1.0});
-    vari_list_1.append({"u16CurPhaseL3Raw", 13.2, "[A]", "uint16_t", 1.0});
+    addVariables();
 
-    vari_list_2.append({"u16VoltPhaseL1Raw", 15.2, "[V]", "uint16_t", 1.0});
-    vari_list_2.append({"u16VoltPhaseL2Raw", 11.2, "[V]", "uint16_t", 1.0});
-    vari_list_2.append({"u16VoltPhaseL3Raw", 13.2, "[V]", "uint16_t", 1.0});
+    vari_list_1.append(vari_list_main.at(0));
+    vari_list_1.append(vari_list_main.at(1));
+
+    vari_list_2.append(vari_list_main.at(0));
+    vari_list_2.append(vari_list_main.at(1));
+
 
     tabbar_var.append(new tabbar_class(this, "System"));
     tabbar_var.append(new tabbar_class(this, "Phasecurrent"));
@@ -57,12 +58,12 @@ MainWindow::MainWindow(QWidget *parent)
         tabbar1->addTab(temp->tab_widget, temp->getTabbarName());
     }
 
-    tabbar_class *temp = tabbar_var.at(0);
+    tabbar_class *temp;
+
+    /* add to mdi window 1 - System */
+    temp = tabbar_var.at(0);
     temp->addVariableWindow(vari_list_1);
     temp->addVariableWindow(vari_list_2);
-
-    temp->addParameterWindow(new_list);
-    temp->addPlotWindow("f32CurPhaseL1");
 
     tabbar1->setTabPosition(QTabWidget::South);
 
@@ -121,6 +122,19 @@ void MainWindow::addVariable()
     add_variable_dialog *new_dialog = new add_variable_dialog(this, variable_list);
 }
 
+void MainWindow::addVariables()
+{
+    for (quint16 i = 0; i < 25; i++)
+    {
+        vari_list_main.append({"", 0.0, "", "", 0.0});
+    }
+
+    vari_list_main[0] = {"u16CurPhaseL2Raw", 15.2, "[A]", "uint16_t", 1.0};
+    vari_list_main[1] = {"u16CurPhaseL3Raw", 15.2, "[A]", "uint16_t", 1.0};
+
+
+}
+
 void MainWindow::load_a2l()
 {
 
@@ -144,7 +158,6 @@ void MainWindow::load_a2l()
 
 void MainWindow::add_subwindow()
 {
-  //  dialog_1 = new Dialog(this, "Measure Window", variable_list);
 }
 
 
@@ -152,11 +165,18 @@ void MainWindow::readData()
 {
     result_readData = port->getReadData();
 
-    if (tabbar_var.length() > 0)
+    for (qint16 i = 0; i < result_readData.length(); i++)
     {
-        tabbar_class *temp = tabbar_var.at(0);
+        vari_list_main[i].variable_value =  result_readData[i];
+    }
+
+    for (quint8 i = 0; i < tabbar_var.length(); i++)
+    {
+        tabbar_class *temp = tabbar_var.at(i);
         temp->setVariableValue(result_readData.at(19));
     }
+
+    /* set progress bar */
     progressbar->setValue(result_readData.at(0));
 }
 
@@ -175,6 +195,13 @@ void MainWindow::on_button1_clicked()
         MainWindow::button1->setText("Connect");
         ui_connected = false;
     }
+}
+
+void MainWindow::setReadData(quint16 readDataID, quint16 readDataValue)
+{
+
+    //vari_list_main
+
 }
 
 void MainWindow::setupMainwindow()

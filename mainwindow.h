@@ -25,6 +25,7 @@ private:
     void createMenus();
     void createActions();
     void addVariable();
+    void addVariables();
     void load_a2l();
     void setupMainwindow();
 
@@ -80,6 +81,9 @@ private:
     serial_thread *port;
     QVector<int16_t> result_readData;
 
+    QList<data_type_variable> vari_list_main;
+
+
 private slots:
     void on_button1_clicked();
 
@@ -90,6 +94,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void add_subwindow();
+    void setReadData(quint16 readDataID, quint16 readDataValue);
 
     QPushButton *button1;
 };
