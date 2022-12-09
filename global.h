@@ -5,7 +5,7 @@
 
 struct data_type_variable
 {
-    //float id;
+    qint8 id;
     QString variable_name;
     float variable_value;
     QString variable_unit;

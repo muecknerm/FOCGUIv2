@@ -18,6 +18,7 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
         labels_name << new QLabel(this);
         labels_value << new QLabel(this);
         labels_unit << new QLabel(this);
+        labels_id.append(0);
     }
 
     for (int i = 0; i < vari_list.length(); ++i)
@@ -28,6 +29,7 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
         labels_name.at(i)->setText(foo.variable_name);
         labels_value.at(i)->setText("0.0");
         labels_unit.at(i)->setText(foo.variable_unit);
+        labels_id[i] = foo.id;
 
         labels_name.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         labels_value.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -60,7 +62,11 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
 
 Dialog::setValue(QList<data_type_variable> vari_list_main)
 {
-    labels_value.at(0)->setText(QString::number(vari_list_main[1].variable_value));
+    for (int i = 0; i < labels_name.length(); i++)
+    {
+        labels_value.at(i)->setText(QString::number(vari_list_main[labels_id[i]].variable_value));
+    }
+
 }
 
 Dialog::~Dialog()

@@ -19,6 +19,7 @@ private:
     QList<QLabel *> labels_name;
     QList<QLabel *> labels_value;
     QList<QLabel *> labels_unit;
+    QList<qint16>   labels_id;
 
 public:
     Dialog(QWidget *parent = nullptr, QString windowTitle = "Hallo", QList<data_type_variable> vari_list = {});

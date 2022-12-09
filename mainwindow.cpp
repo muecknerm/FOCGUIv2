@@ -41,14 +41,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     addVariables();
 
-    vari_list_1.append(vari_list_main.at(0));
-    vari_list_1.append(vari_list_main.at(3));
+    vari_list_1.append(vari_list_main.at(19));
+    vari_list_1.append(vari_list_main.at(18));
+    vari_list_1.append(vari_list_main.at(17));
 
-    vari_list_2.append(vari_list_main.at(0));
     vari_list_2.append(vari_list_main.at(1));
     vari_list_2.append(vari_list_main.at(4));
-    vari_list_2.append(vari_list_main.at(5));
-
+    vari_list_2.append(vari_list_main.at(19));
 
     tabbar_var.append(new tabbar_class(this, "System"));
     tabbar_var.append(new tabbar_class(this, "Phasecurrent"));
@@ -128,15 +127,17 @@ void MainWindow::addVariables()
 {
     for (quint16 i = 0; i < 25; i++)
     {
-        vari_list_main.append({"", 0.0, "", "", 0.0});
+        vari_list_main.append({i,"", 0.0, "", "", 0.0});
     }
 
-    vari_list_main[0] = {"s16AngleRot",         0.0, "[°]", "int16_t", 1000.0};
-    vari_list_main[1] = {"s16SpeedMech",        0.0, "[rpm]", "uint16_t", 1.0};
-    vari_list_main[2] = {"s16DucyPwmL1Invt",    0.0, "[]", "uint16_t", 1.0};
-    vari_list_main[3] = {"s16DucyPwmL2Invt",    0.0, "[]", "uint16_t", 1.0};
-    vari_list_main[4] = {"s16DucyPwmL2Invt",    0.0, "[]", "uint16_t", 1.0};
-    vari_list_main[5] = {"s16SpeedRef",         0.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[1] = {1,"s16AngleRot",         1.0, "[°]", "int16_t", 1000.0};
+    vari_list_main[2] = {2,"s16SpeedMech",        2.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[3] = {3,"s16DucyPwmL1Invt",    3.0, "[]", "uint16_t", 1.0};
+    vari_list_main[4] = {4,"s16DucyPwmL2Invt",    4.0, "[]", "uint16_t", 1.0};
+    vari_list_main[5] = {5,"s16DucyPwmL2Invt",    5.0, "[]", "uint16_t", 1.0};
+    vari_list_main[19] = {19,"u16CurPhaseURaw",    6.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[18] = {18,"u16CurPhaseVRaw",    6.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[17] = {17,"u16CurPhaseWRaw",    6.0, "[rpm]", "uint16_t", 1.0};
 }
 
 void MainWindow::load_a2l()
