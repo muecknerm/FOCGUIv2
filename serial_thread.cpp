@@ -42,8 +42,9 @@ void serial_thread::handleReadyRead()
                  result_readData[i] = ((quint16) m_readData.at(i*2 + 2) << 8) | ((quint8) m_readData.at(i*2+1 + 2));
             }
 
-            qDebug() << result_readData[0] << "[/]"
-                     << result_readData[18]<< "[A]"
+            qDebug() << result_readData[0] << "[/]" << " | "
+                     << result_readData[1] << "[°]" << " | "
+                     << result_readData[18]<< "[A]" << " | "
                      << result_readData[19]<< "[A]";
         }
         m_readData.clear();

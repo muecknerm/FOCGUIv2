@@ -49,12 +49,12 @@ void tabbar_class::addParameterWindow(QStringList *variable_list)
     mdi_area->addSubWindow(parameter_window_1.at(0));
 }
 
-void tabbar_class::setVariableValue(int value)
+void tabbar_class::setVariableValue(QList<data_type_variable> vari_list_main)
 {
     for (quint8 i = 0; i < dialog_1.length(); i++ )
     {
         Dialog *foo = dialog_1.at(i);
-        foo->setValue(value);
+        foo->setValue(vari_list_main);
     }
 }
 

@@ -58,9 +58,9 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
     resize(400,100);
 }
 
-Dialog::setValue(int16_t value)
+Dialog::setValue(QList<data_type_variable> vari_list_main)
 {
-    labels_value.at(0)->setText(QString::number(value));
+    labels_value.at(0)->setText(QString::number(vari_list_main[1].variable_value));
 }
 
 Dialog::~Dialog()

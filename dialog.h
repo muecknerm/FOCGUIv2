@@ -23,6 +23,6 @@ private:
 public:
     Dialog(QWidget *parent = nullptr, QString windowTitle = "Hallo", QList<data_type_variable> vari_list = {});
     ~Dialog();
-    setValue(int16_t value);
+    setValue(QList<data_type_variable> vari_list_main);
 };
 #endif // DIALOG_H

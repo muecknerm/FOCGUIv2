@@ -42,10 +42,12 @@ MainWindow::MainWindow(QWidget *parent)
     addVariables();
 
     vari_list_1.append(vari_list_main.at(0));
-    vari_list_1.append(vari_list_main.at(1));
+    vari_list_1.append(vari_list_main.at(3));
 
     vari_list_2.append(vari_list_main.at(0));
     vari_list_2.append(vari_list_main.at(1));
+    vari_list_2.append(vari_list_main.at(4));
+    vari_list_2.append(vari_list_main.at(5));
 
 
     tabbar_var.append(new tabbar_class(this, "System"));
@@ -129,10 +131,12 @@ void MainWindow::addVariables()
         vari_list_main.append({"", 0.0, "", "", 0.0});
     }
 
-    vari_list_main[0] = {"u16CurPhaseL2Raw", 15.2, "[A]", "uint16_t", 1.0};
-    vari_list_main[1] = {"u16CurPhaseL3Raw", 15.2, "[A]", "uint16_t", 1.0};
-
-
+    vari_list_main[0] = {"s16AngleRot",         0.0, "[°]", "int16_t", 1000.0};
+    vari_list_main[1] = {"s16SpeedMech",        0.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[2] = {"s16DucyPwmL1Invt",    0.0, "[]", "uint16_t", 1.0};
+    vari_list_main[3] = {"s16DucyPwmL2Invt",    0.0, "[]", "uint16_t", 1.0};
+    vari_list_main[4] = {"s16DucyPwmL2Invt",    0.0, "[]", "uint16_t", 1.0};
+    vari_list_main[5] = {"s16SpeedRef",         0.0, "[rpm]", "uint16_t", 1.0};
 }
 
 void MainWindow::load_a2l()
@@ -173,7 +177,7 @@ void MainWindow::readData()
     for (quint8 i = 0; i < tabbar_var.length(); i++)
     {
         tabbar_class *temp = tabbar_var.at(i);
-        temp->setVariableValue(result_readData.at(19));
+        temp->setVariableValue(vari_list_main);
     }
 
     /* set progress bar */
@@ -268,7 +272,9 @@ void MainWindow::setupMainwindow()
     comboBox->setMaximumWidth(150);
     comboBox->setMinimumWidth(150);
 
-    progressbar->setMaximumWidth(100);
+    progressbar->setMaximumWidth(70);
+    progressbar->setTextVisible(false);
+    progressbar->setMaximumHeight(20);
 
     /* Setup main window layout */
     layout_mainwindow->setSpacing(0);
@@ -277,7 +283,7 @@ void MainWindow::setupMainwindow()
 
     layout_mainwindow_bottom_widget->setSpacing(0);
     layout_mainwindow_bottom_widget->setSpacing(0);
-    layout_mainwindow_bottom_widget->setContentsMargins(0,0,0,3);
+    layout_mainwindow_bottom_widget->setContentsMargins(0,0,3,3);
 
     layout_mainwindow_top_widget->addWidget(button1, 0, 0, Qt::AlignLeft);
     layout_mainwindow_top_widget->addWidget(comboBox, 0, 1, Qt::AlignLeft);
@@ -289,7 +295,6 @@ void MainWindow::setupMainwindow()
     layout_mainwindow_top_widget->addWidget(label_wp, 0, 7, Qt::AlignLeft);
     layout_mainwindow_top_widget->addWidget(line_2, 0,8, Qt::AlignLeft);
     layout_mainwindow_top_widget->addWidget(label_2, 0, 9, Qt::AlignLeft);
-
     layout_mainwindow_top_widget->setColumnStretch(9,9);
 
     layout_mainwindow_bottom_widget->addWidget(progressbar, 0, 0, Qt::AlignRight);
