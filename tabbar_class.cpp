@@ -42,11 +42,11 @@ void tabbar_class::addVariableWindow(QList<data_type_variable> vari_list)
     mdi_area->addSubWindow(dialog_1.at(dialog_1.length()-1));
 }
 
-void tabbar_class::addParameterWindow(QStringList *variable_list)
+void tabbar_class::addParameterWindow(QList<data_type_variable> parameter_list)
 {
-    parameter_window_1.append(new Parameter_window(this, "Parameter Window", variable_list));
+    parameter_window_1.append(new Parameter_window(this, "Parameter Window", parameter_list));
 
-    mdi_area->addSubWindow(parameter_window_1.at(0));
+    mdi_area->addSubWindow(parameter_window_1.at(parameter_window_1.length()-1));
 }
 
 void tabbar_class::setVariableValue(QList<data_type_variable> vari_list_main)

@@ -38,16 +38,25 @@ MainWindow::MainWindow(QWidget *parent)
     variable_list = new QStringList();
 
     QList<data_type_variable> vari_list_1, vari_list_2;
+    QList<data_type_variable> paramter_list_1, parameter_list_2;
 
     addVariables();
+    addParameters();
+
 
     vari_list_1.append(vari_list_main.at(19));
     vari_list_1.append(vari_list_main.at(18));
     vari_list_1.append(vari_list_main.at(17));
 
-    vari_list_2.append(vari_list_main.at(1));
-    vari_list_2.append(vari_list_main.at(4));
-    vari_list_2.append(vari_list_main.at(19));
+    for (quint8 i = 1; i < 20; i++)
+    {
+        vari_list_2.append(vari_list_main.at(i));
+    }
+
+    for (quint8 i = 0; i < 10; i++)
+    {
+        paramter_list_1.append(parameter_list_main.at(i));
+    }
 
     tabbar_var.append(new tabbar_class(this, "System"));
     tabbar_var.append(new tabbar_class(this, "Phasecurrent"));
@@ -59,12 +68,14 @@ MainWindow::MainWindow(QWidget *parent)
         tabbar1->addTab(temp->tab_widget, temp->getTabbarName());
     }
 
-    tabbar_class *temp;
 
     /* add to mdi window 1 - System */
+    tabbar_class *temp;
     temp = tabbar_var.at(0);
     temp->addVariableWindow(vari_list_1);
     temp->addVariableWindow(vari_list_2);
+
+    temp->addParameterWindow(paramter_list_1);
 
     tabbar1->setTabPosition(QTabWidget::South);
 
@@ -130,14 +141,50 @@ void MainWindow::addVariables()
         vari_list_main.append({i,"", 0.0, "", "", 0.0});
     }
 
-    vari_list_main[1] = {1,"s16AngleRot",         1.0, "[°]", "int16_t", 1000.0};
-    vari_list_main[2] = {2,"s16SpeedMech",        2.0, "[rpm]", "uint16_t", 1.0};
-    vari_list_main[3] = {3,"s16DucyPwmL1Invt",    3.0, "[]", "uint16_t", 1.0};
-    vari_list_main[4] = {4,"s16DucyPwmL2Invt",    4.0, "[]", "uint16_t", 1.0};
-    vari_list_main[5] = {5,"s16DucyPwmL2Invt",    5.0, "[]", "uint16_t", 1.0};
-    vari_list_main[19] = {19,"u16CurPhaseURaw",    6.0, "[rpm]", "uint16_t", 1.0};
-    vari_list_main[18] = {18,"u16CurPhaseVRaw",    6.0, "[rpm]", "uint16_t", 1.0};
-    vari_list_main[17] = {17,"u16CurPhaseWRaw",    6.0, "[rpm]", "uint16_t", 1.0};
+    vari_list_main[0]  = {1,"Counter",             0.0, "[]",       "uint8_t",  1.0};
+    vari_list_main[1]  = {1,"s16AngleRot",         0.0, "[°]",      "int16_t",  1000.0};
+    vari_list_main[2]  = {2,"s16SpeedMech",        0.0, "[rpm]",    "uint16_t", 1.0};
+    vari_list_main[3]  = {3,"s16DucyPwmL1Invt",    0.0, "[%]",       "uint16_t", 1.0};
+    vari_list_main[4]  = {4,"s16DucyPwmL2Invt",    0.0, "[%]",       "uint16_t", 1.0};
+    vari_list_main[5]  = {5,"s16SpeedRef",         0.0, "[rpm]",       "uint16_t", 1.0};
+    vari_list_main[6]  = {6,"u16VoltDCLinkRaw",    0.0, "[]",       "uint16_t", 1.0};
+    vari_list_main[7]  = {7,"s16CurPhaseU",        0.0, "[A]",       "uint16_t", 1.0};
+    vari_list_main[8]  = {8,"s16CurPhaseV",        0.0, "[A]",       "uint16_t", 1.0};
+    vari_list_main[9]  = {9,"s16CurPhaseW",        0.0, "[A]",       "uint16_t", 1.0};
+    vari_list_main[10] = {10,"s16VoltPhaseU",      0.0, "[V]",       "uint16_t", 1.0};
+    vari_list_main[11] = {11,"s16VoltPhaseV",      0.0, "[V]",       "uint16_t", 1.0};
+    vari_list_main[12] = {12,"s16VoltPhaseW",      0.0, "[V]",       "uint16_t", 1.0};
+    vari_list_main[13] = {13,"s16CurDx",           0.0, "[A]",       "uint16_t", 1.0};
+    vari_list_main[14] = {14,"s16CurQx",           0.0, "[A]",       "uint16_t", 1.0};
+    vari_list_main[15] = {15,"s16VoltDx",          0.0, "[V]",       "uint16_t", 1.0};
+    vari_list_main[16] = {16,"s16VoltQx",          0.0, "[V]",       "uint16_t", 1.0};
+    vari_list_main[17] = {17,"u16CurPhaseURaw",    0.0, "[]",    "uint16_t", 1.0};
+    vari_list_main[18] = {18,"u16CurPhaseVRaw",    0.0, "[]",    "uint16_t", 1.0};
+    vari_list_main[19] = {19,"u16CurPhaseWRaw",    0.0, "[]",    "uint16_t", 1.0};
+    vari_list_main[20] = {20,"",    0.0, "[rpm]",    "uint16_t", 1.0};
+    vari_list_main[21] = {21,"",    0.0, "[rpm]",    "uint16_t", 1.0};
+    vari_list_main[22] = {22,"",    0.0, "[rpm]",    "uint16_t", 1.0};
+    vari_list_main[23] = {23,"",    0.0, "[rpm]",    "uint16_t", 1.0};
+    vari_list_main[24] = {24,"",    0.0, "[rpm]",    "uint16_t", 1.0};
+}
+
+void MainWindow::addParameters()
+{
+    for (quint16 i = 0; i < 11; i++)
+    {
+        parameter_list_main.append({i,"", 0.0, "", "", 0.0});
+    }
+
+    parameter_list_main[0]  = {0,"cs16SpeedRef_C",         0.0, "[]",       "uint8_t",  1.0};
+    parameter_list_main[1]  = {1,"cu16SpeedCtrlKp_C",      0.0, "[°]",      "int16_t",  1000.0};
+    parameter_list_main[2]  = {2,"cu16SpeedGradient_C",    0.0, "[rpm]",    "uint16_t", 1.0};
+    parameter_list_main[3]  = {3,"cu16OfsCurPhaseL1_C",    0.0, "[%]",      "uint16_t", 1.0};
+    parameter_list_main[4]  = {4,"cu16OfsCurPhaseL2_C",    0.0, "[%]",      "uint16_t", 1.0};
+    parameter_list_main[5]  = {5,"cu16OfsCurPhaseL3_C",    0.0, "[rpm]",    "uint16_t", 1.0};
+    parameter_list_main[6]  = {6,"cbStateEnaManVoltCtl_C", 0.0, "[]",       "uint16_t", 1.0};
+    parameter_list_main[7]  = {7,"cf32VoltDxRefMan_C",     0.0, "[A]",      "uint16_t", 1.0};
+    parameter_list_main[8]  = {8,"cf32VoltQxRefMan_C",     0.0, "[A]",      "uint16_t", 1.0};
+    parameter_list_main[9]  = {9,"cf32AngleOffset_C",      0.0, "[A]",      "uint16_t", 1.0};
 }
 
 void MainWindow::load_a2l()
@@ -152,7 +199,6 @@ void MainWindow::load_a2l()
     }
 
     QTextStream in(&file_data);
-
 
     while(!in.atEnd()) {
         variable_list->append( in.readLine());
@@ -185,6 +231,11 @@ void MainWindow::readData()
     progressbar->setValue(result_readData.at(0));
 }
 
+void MainWindow::writeData()
+{
+
+}
+
 void MainWindow::on_button1_clicked()
 {
     if (ui_connected == false)
@@ -206,7 +257,6 @@ void MainWindow::setReadData(quint16 readDataID, quint16 readDataValue)
 {
 
     //vari_list_main
-
 }
 
 void MainWindow::setupMainwindow()

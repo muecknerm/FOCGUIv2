@@ -26,6 +26,7 @@ private:
     void createActions();
     void addVariable();
     void addVariables();
+    void addParameters();
     void load_a2l();
     void setupMainwindow();
 
@@ -82,13 +83,14 @@ private:
     QVector<int16_t> result_readData;
 
     QList<data_type_variable> vari_list_main;
-
+    QList<data_type_variable> parameter_list_main;
 
 private slots:
     void on_button1_clicked();
 
 public slots:
     void readData();
+    void writeData():
 
 public:
     MainWindow(QWidget *parent = nullptr);

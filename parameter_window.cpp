@@ -6,24 +6,28 @@
 #include <Qlist.h>
 #include <QSpinBox>
 
-Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QStringList *variable_list) :
+Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QList<data_type_variable> parameter_list) :
     QDialog(parent)
 {
     this->setWindowTitle(windowTitle);
 
     QGridLayout *layout_1 = new QGridLayout();
 
-    for (int i = 0; i < variable_list->length(); i++)
+    for (int i = 0; i < parameter_list.length(); i++)
     {
         labels_name << new QLabel(this);
         spinbox_value << new QSpinBox(this);
         labels_unit << new QLabel(this);
+        labels_id.append(0);
     }
-    for (int i = 0; i < variable_list->length(); i++)
+    for (int i = 0; i < parameter_list.length(); i++)
     {
-        labels_name.at(i)->setText("f32CurrPhaseL1");
+        data_type_variable foo = parameter_list.at(i);
+
+        labels_name.at(i)->setText(foo.variable_name);
         //spinbox_value.at(i)->setText("0.0");
-        labels_unit.at(i)->setText("[rpm]");
+        labels_unit.at(i)->setText(foo.variable_unit);
+        labels_id[i] = foo.id;
 
         labels_name.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         //spinbox_value.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -37,7 +41,7 @@ Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QString
         layout_1->setSpacing(0);
         layout_1->setContentsMargins(0,0,0,0);
     }
-    for (int i = 0; i < variable_list->length(); i++)
+    for (int i = 0; i < parameter_list.length(); i++)
     {
         layout_1->addWidget(labels_name.at(i),i,0);
         layout_1->addWidget(spinbox_value.at(i),i,1);
@@ -48,7 +52,7 @@ Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QString
 
     //setMinimumSize(500, 50);
 
-    setMinimumHeight(25 * variable_list->length());
+    setMinimumHeight(25 * parameter_list.length());
 
     setMinimumWidth(400);
 
