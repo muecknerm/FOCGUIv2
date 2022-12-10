@@ -34,8 +34,8 @@ public:
     QMdiArea *mdi_area;
     QGridLayout *tab_widget_layout;
 
-    void addPlotWindow(QString variable_name);
-    void addVariableWindow(QList<data_type_variable> vari_list);
+    void addPlotWindow(QList<data_type_variable> variable_list);
+    void addVariableWindow(QList<data_type_variable> variable_list);
     void addParameterWindow(QList<data_type_variable> parameter_list);
     void setVariableValue(QList<data_type_variable> vari_list_main);
     QString getTabbarName();

@@ -36,20 +36,24 @@ MainWindow::MainWindow(QWidget *parent)
     port = new serial_thread();
 
     QList<data_type_variable> variable_list_1, variable_list_2;
+    QList<data_type_variable> plot_list_1, plot_list_2;
     QList<data_type_variable> paramter_list_1, parameter_list_2;
 
     addVariables();
     addParameters();
 
-
     variable_list_1.append(variable_list.at(19));
     variable_list_1.append(variable_list.at(18));
     variable_list_1.append(variable_list.at(17));
+
 
     for (quint8 i = 1; i < 20; i++)
     {
         variable_list_2.append(variable_list.at(i));
     }
+
+    plot_list_1.append(variable_list.at(1));
+    plot_list_2.append(variable_list.at(19));
 
     for (quint8 i = 0; i < 10; i++)
     {
@@ -73,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent)
     temp->addVariableWindow(variable_list_2);
 
     temp->addParameterWindow(paramter_list_1);
+
+    temp->addPlotWindow(plot_list_1);
+    temp->addPlotWindow(plot_list_2);
 
     tabbar1->setTabPosition(QTabWidget::South);
 

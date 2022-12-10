@@ -1,15 +1,14 @@
 #include "add_plot_dialoag.h"
-
-
 #include <QVector>
+#include <QDebug>
 
-add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QString vairable_name) :
+add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QList<data_type_variable> variable_list) :
     QDialog(parent)
 {
     this->setWindowTitle("XY-Plot Window");
 
     QGridLayout *main_layout = new QGridLayout();
-    QCustomPlot *customPlot = new QCustomPlot();
+    customPlot = new QCustomPlot();
 
     QVector<double> x(10), y(10); // initialize with entries 0..100
 
@@ -24,6 +23,7 @@ add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QString
     customPlot->graph(0)->setData(x, y);
     customPlot->xAxis->setLabel("Time [s]");
     customPlot->yAxis->setLabel("Speed [rpm]");
+    customPlot->yAxis->setRange(0, 7000);
 
     /* set layout */
     main_layout->setSpacing(0);
@@ -37,6 +37,20 @@ add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QString
     setLayout(main_layout);
 
     this->show();
+}
+
+void add_plot_dialoag::setValue(QList<data_type_variable> variable_list)
+{
+    static double key = 0;
+    customPlot->graph(0)->addData(key, variable_list[1].variable_value);
+    customPlot->xAxis->setRange(key, 1, Qt::AlignRight);
+    customPlot->replot();
+        key = key + 0.01;
+
+    qDebug() << "Hallo";
+
+
+
 }
 
 add_plot_dialoag::~add_plot_dialoag()
