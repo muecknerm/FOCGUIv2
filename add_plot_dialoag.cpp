@@ -18,6 +18,25 @@ add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QList<d
         y[i]=1;
     }
 
+    for (int i = 0; i < variable_list.length(); ++i)
+    {
+        labels_name << new QLabel(this);
+        labels_value << new QLabel(this);
+        labels_unit << new QLabel(this);
+        labels_id.append(0);
+    }
+
+    for (int i = 0; i < variable_list.length(); ++i)
+    {
+
+        data_type_variable foo = variable_list.at(i);
+
+        labels_name.at(i)->setText(foo.variable_name);
+        labels_value.at(i)->setText("0.0");
+        labels_unit.at(i)->setText(foo.variable_unit);
+        labels_id[i] = foo.id;
+    }
+
     // create graph and assign data to it:
     customPlot->addGraph();
     customPlot->graph(0)->setData(x, y);
@@ -42,15 +61,12 @@ add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QList<d
 void add_plot_dialoag::setValue(QList<data_type_variable> variable_list)
 {
     static double key = 0;
-    customPlot->graph(0)->addData(key, variable_list[1].variable_value);
+
+    customPlot->graph(0)->addData(key, variable_list[labels_id[0]].variable_value);
     customPlot->xAxis->setRange(key, 1, Qt::AlignRight);
     customPlot->replot();
-        key = key + 0.01;
 
-    qDebug() << "Hallo";
-
-
-
+    key = key + 0.01;
 }
 
 add_plot_dialoag::~add_plot_dialoag()

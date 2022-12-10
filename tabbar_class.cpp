@@ -22,7 +22,6 @@ tabbar_class::tabbar_class(QWidget *parent, QString tabbar_name="noname"):
     mdi_area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 }
 
-
 QString tabbar_class::getTabbarName()
 {
     return tabbar_name_local;

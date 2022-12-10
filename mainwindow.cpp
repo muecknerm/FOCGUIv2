@@ -42,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent)
     addVariables();
     addParameters();
 
-    variable_list_1.append(variable_list.at(19));
-    variable_list_1.append(variable_list.at(18));
     variable_list_1.append(variable_list.at(17));
+    variable_list_1.append(variable_list.at(18));
+    variable_list_1.append(variable_list.at(19));
 
 
     for (quint8 i = 1; i < 20; i++)
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     plot_list_1.append(variable_list.at(1));
-    plot_list_2.append(variable_list.at(19));
+    plot_list_2.append(variable_list.at(17));
 
     for (quint8 i = 0; i < 10; i++)
     {
