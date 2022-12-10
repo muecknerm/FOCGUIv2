@@ -73,8 +73,6 @@ private:
     QGridLayout *layout_mainwindow_top_widget;
     QGridLayout *layout_mainwindow_left_widget;
 
-    QStringList *variable_list;
-
     QList <tabbar_class *> tabbar_var;
 
     /* configure application */
@@ -82,15 +80,15 @@ private:
     serial_thread *port;
     QVector<int16_t> result_readData;
 
-    QList<data_type_variable> vari_list_main;
-    QList<data_type_variable> parameter_list_main;
+    QList<data_type_variable> variable_list;
+    QList<data_type_variable> parameter_list;
 
 private slots:
     void on_button1_clicked();
 
 public slots:
     void readData();
-    void writeData():
+    void writeData();
 
 public:
     MainWindow(QWidget *parent = nullptr);

@@ -6,14 +6,14 @@
 #include <Qlist.h>
 
 
-Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> vari_list) :
+Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> variable_list) :
     QDialog(parent)
 {
     this->setWindowTitle(windowTitle);
 
     QGridLayout *layout_1 = new QGridLayout();
 
-    for (int i = 0; i < vari_list.length(); ++i)
+    for (int i = 0; i < variable_list.length(); ++i)
     {
         labels_name << new QLabel(this);
         labels_value << new QLabel(this);
@@ -21,10 +21,10 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
         labels_id.append(0);
     }
 
-    for (int i = 0; i < vari_list.length(); ++i)
+    for (int i = 0; i < variable_list.length(); ++i)
     {
 
-        data_type_variable foo = vari_list.at(i);
+        data_type_variable foo = variable_list.at(i);
 
         labels_name.at(i)->setText(foo.variable_name);
         labels_value.at(i)->setText("0.0");
@@ -44,7 +44,7 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
         layout_1->setContentsMargins(0,0,0,0);
     }
 
-    for (int i = 0; i < vari_list.length(); ++i)
+    for (int i = 0; i < variable_list.length(); ++i)
     {
         layout_1->addWidget(labels_name.at(i),i,0);
         layout_1->addWidget(labels_value.at(i),i,1);
@@ -53,18 +53,18 @@ Dialog::Dialog(QWidget *parent, QString windowTitle, QList<data_type_variable> v
 
     setLayout(layout_1);
 
-    setMinimumHeight(25 * vari_list.length());
+    setMinimumHeight(25 * variable_list.length());
 
     setMinimumWidth(400);
 
     resize(400,100);
 }
 
-Dialog::setValue(QList<data_type_variable> vari_list_main)
+Dialog::setValue(QList<data_type_variable> variable_list)
 {
     for (int i = 0; i < labels_name.length(); i++)
     {
-        labels_value.at(i)->setText(QString::number(vari_list_main[labels_id[i]].variable_value));
+        labels_value.at(i)->setText(QString::number(variable_list[labels_id[i]].variable_value));
     }
 
 }
