@@ -29,6 +29,7 @@ public:
     void open_serial();
     void close_serial();
     QVector<int16_t> getReadData();
+    void setWriteData(quint16 id, quint16 value);
 
 
 };

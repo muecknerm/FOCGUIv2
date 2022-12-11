@@ -17,6 +17,8 @@ private:
     QList<qint16>   labels_id;
     QCustomPlot *customPlot;
 
+    void on_button1_clicked();
+
 public:
     void setValue(QList<data_type_variable> variable_list);
     add_plot_dialoag(QWidget *parent = nullptr, QString windowTitle = "Plot Window", QList<data_type_variable> variable_list = {});

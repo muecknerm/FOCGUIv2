@@ -62,10 +62,8 @@ private:
     QLabel *label_rp;
     QTabWidget *tabbar1;
 
-
     QFrame *line_1;
     QFrame *line_2;
-
 
     /* Layout */
     QGridLayout *layout_mainwindow;
@@ -77,7 +75,7 @@ private:
 
     /* configure application */
     bool ui_connected;
-    serial_thread *port;
+
     QVector<int16_t> result_readData;
 
     QList<data_type_variable> variable_list;
@@ -88,9 +86,11 @@ private slots:
 
 public slots:
     void readData();
-    void writeData();
+
 
 public:
+    void writeData(quint16 id, quint16 value);
+    serial_thread *port;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void add_subwindow();

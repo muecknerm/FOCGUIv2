@@ -64,7 +64,9 @@ Dialog::setValue(QList<data_type_variable> variable_list)
 {
     for (int i = 0; i < labels_name.length(); i++)
     {
-        labels_value.at(i)->setText(QString::number(variable_list[labels_id[i]].variable_value));
+        labels_value.at(i)->setText(QString::number(variable_list[labels_id[i]].variable_value,
+                                                    variable_list[labels_id[i]].format_typ,
+                                                    variable_list[labels_id[i]].format_length));
     }
 
 }

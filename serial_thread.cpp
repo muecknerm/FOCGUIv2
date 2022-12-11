@@ -31,7 +31,6 @@ void serial_thread::handleReadyRead()
 {
     m_readData.append(serialPort->readAll());
 
-
     if (m_readData.size() >= 50)
     {
         if ((m_readData.at(0) == '#') && (m_readData.at(1) == '#') )
@@ -42,10 +41,12 @@ void serial_thread::handleReadyRead()
                  result_readData[i] = ((quint16) m_readData.at(i*2 + 2) << 8) | ((quint8) m_readData.at(i*2+1 + 2));
             }
 
+            /*
             qDebug() << result_readData[0] << "[/]" << " | "
                      << result_readData[1] << "[°]" << " | "
                      << result_readData[18]<< "[A]" << " | "
                      << result_readData[19]<< "[A]";
+                     */
         }
         m_readData.clear();
 
@@ -56,6 +57,37 @@ void serial_thread::handleReadyRead()
 QVector<int16_t> serial_thread::getReadData()
 {
     return result_readData;
+}
+
+void serial_thread::setWriteData(quint16 id, quint16 value)
+{
+
+    QByteArray data;
+    qint16 sendTmp = (qint16) value;
+    data.resize(7);
+
+    switch (id)
+    {
+    case 0:
+        data[2] = 0x10;
+        break;
+    case 7:
+       data[2] = 0x18;
+        break;
+    case 8:
+        data[2] = 0x19;
+
+        break;
+    }
+
+    data[0] = 0x23;
+    data[1] = 0x23;
+    data[3] = sendTmp>>8;
+    data[4] = sendTmp;
+    data[5] = 0x01;
+    data[6] = 0x01;
+
+    serialPort->write(data);
 }
 
 void dataReadyRead()

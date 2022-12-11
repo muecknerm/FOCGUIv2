@@ -28,21 +28,20 @@ add_plot_dialoag::add_plot_dialoag(QWidget *parent, QString windowTitle, QList<d
 
     for (int i = 0; i < variable_list.length(); ++i)
     {
-
         data_type_variable foo = variable_list.at(i);
 
         labels_name.at(i)->setText(foo.variable_name);
         labels_value.at(i)->setText("0.0");
         labels_unit.at(i)->setText(foo.variable_unit);
         labels_id[i] = foo.id;
-    }
 
-    // create graph and assign data to it:
-    customPlot->addGraph();
-    customPlot->graph(0)->setData(x, y);
-    customPlot->xAxis->setLabel("Time [s]");
-    customPlot->yAxis->setLabel("Speed [rpm]");
-    customPlot->yAxis->setRange(0, 7000);
+        // create graph and assign data to it:
+        customPlot->addGraph();
+        customPlot->graph(i)->setData(x, y);
+        customPlot->xAxis->setLabel("Time [s]");
+        customPlot->yAxis->setLabel(foo.variable_name + " " + foo.variable_unit);
+        customPlot->yAxis->setRange(foo.min_value, foo.max_value);
+    }
 
     /* set layout */
     main_layout->setSpacing(0);

@@ -36,7 +36,7 @@ public:
 
     void addPlotWindow(QList<data_type_variable> variable_list);
     void addVariableWindow(QList<data_type_variable> variable_list);
-    void addParameterWindow(QList<data_type_variable> parameter_list);
+    void addParameterWindow(QList<data_type_variable> parameter_list, serial_thread *port);
     void setVariableValue(QList<data_type_variable> vari_list_main);
     QString getTabbarName();
 };
