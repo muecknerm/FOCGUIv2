@@ -15,6 +15,8 @@ Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QList<d
 
     port_parameter = port;
 
+    parameter_list_window = parameter_list;
+
     QGridLayout *layout_1 = new QGridLayout();
 
     for (int i = 0; i < parameter_list.length(); i++)
@@ -31,7 +33,7 @@ Parameter_window::Parameter_window(QWidget *parent, QString windowTitle, QList<d
         spinbox_value.at(i)->setObjectName(QString::number(foo.id));
         labels_unit.at(i)->setText(foo.variable_unit);
         labels_id[i] = foo.id;
-        scaling_factor[i] = foo.variable_scaling_factor;
+        //scaling_factor[i] = foo.variable_scaling_factor;
 
         labels_name.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         //spinbox_value.at(i)->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -70,7 +72,10 @@ void Parameter_window::on_button1_clicked()
 {
     QSpinBox *changedSpinbox = qobject_cast<QSpinBox *>(sender());
 
-    port_parameter->setWriteData(changedSpinbox->objectName().toInt(), changedSpinbox->value());
+    port_parameter->setWriteData(changedSpinbox->objectName().toInt(),
+                                 changedSpinbox->value() * parameter_list_window[changedSpinbox->objectName().toInt()].variable_scaling_factor);
+
+
 }
 
 Parameter_window::~Parameter_window()

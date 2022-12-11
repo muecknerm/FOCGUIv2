@@ -34,12 +34,10 @@ MainWindow::MainWindow(QWidget *parent)
     addParameters();
 
     /* setup content */
-    QStringList *new_list = new QStringList();
-
     port = new serial_thread();
 
     QList<data_type_variable> variable_list_1, variable_list_2;
-    QList<data_type_variable> plot_list_1, plot_list_2, plot_list_3;
+    QList<data_type_variable> plot_list_1, plot_list_2, plot_list_3, plot_list_4;
     QList<data_type_variable> paramter_list_1, parameter_list_2;
 
     variable_list_1.append(variable_list.at(17));
@@ -53,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     plot_list_1.append(variable_list.at(1));
     plot_list_2.append(variable_list.at(17));
-
     plot_list_3.append(variable_list.at(13));
+    plot_list_4.append(variable_list.at(10));
 
     for (quint8 i = 0; i < 10; i++)
     {
@@ -82,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent)
     temp->addPlotWindow(plot_list_1);
     temp->addPlotWindow(plot_list_2);
     temp->addPlotWindow(plot_list_3);
+    temp->addPlotWindow(plot_list_4);
+
 
     tabbar1->setTabPosition(QTabWidget::South);
 
@@ -147,26 +147,26 @@ void MainWindow::addVariables()
         variable_list.append({i,"", 0.0, "", "", 0.0, 'f', 0,0,0}); //, "", 0
     }
 
-    variable_list[0]  = {1,"Counter",             0.0, "[]",       "uint8_t",  1.0,       'f', 0, 0, 255};
-    variable_list[1]  = {1,"s16AngleRot",         0.0, "[°]",      "int16_t",  1000.0,    'f', 2, 0, 7};
-    variable_list[2]  = {2,"s16SpeedMech",        0.0, "[rpm]",    "uint16_t", 1.0,       'f', 2, -8000, 8000};
-    variable_list[3]  = {3,"s16DucyPwmL1Invt",    0.0, "[%]",      "uint16_t", 1.0,       'f', 2, 0, 100};
-    variable_list[4]  = {4,"s16DucyPwmL2Invt",    0.0, "[%]",      "uint16_t", 1.0,       'f', 2, 0, 100};
-    variable_list[5]  = {5,"s16SpeedRef",         0.0, "[rpm]",    "uint16_t", 1.0,       'f', 2, 0, 100};
-    variable_list[6]  = {6,"u16VoltDCLinkRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0, 0 , 65000};
-    variable_list[7]  = {7,"s16CurPhaseU",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[8]  = {8,"s16CurPhaseV",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[9]  = {9,"s16CurPhaseW",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[10] = {10,"s16VoltPhaseU",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[11] = {11,"s16VoltPhaseV",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[12] = {12,"s16VoltPhaseW",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[13] = {13,"s16CurDx",           0.0, "[A]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[14] = {14,"s16CurQx",           0.0, "[A]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[15] = {15,"s16VoltDx",          0.0, "[V]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[16] = {16,"s16VoltQx",          0.0, "[V]",      "uint16_t", 1000.0,    'f', 2, -20, 20};
-    variable_list[17] = {17,"u16CurPhaseURaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0, 0, 65000};
-    variable_list[18] = {18,"u16CurPhaseVRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0, 0, 65000};
-    variable_list[19] = {19,"u16CurPhaseWRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0, 0, 65000};
+    variable_list[0]  = {1,"Counter",             0.0, "[]",       "uint8_t",  1.0,       'f', 0,   0,      255};
+    variable_list[1]  = {1,"s16AngleRot",         0.0, "[°]",      "int16_t",  1000.0,    'f', 2,   0,      7};
+    variable_list[2]  = {2,"s16SpeedMech",        0.0, "[rpm]",    "uint16_t", 1.0,       'f', 2,   -8000,  8000};
+    variable_list[3]  = {3,"s16DucyPwmL1Invt",    0.0, "[%]",      "uint16_t", 1.0,       'f', 2,   0,      100};
+    variable_list[4]  = {4,"s16DucyPwmL2Invt",    0.0, "[%]",      "uint16_t", 1.0,       'f', 2,   0,      100};
+    variable_list[5]  = {5,"s16SpeedRef",         0.0, "[rpm]",    "uint16_t", 1.0,       'f', 2,   0,      100};
+    variable_list[6]  = {6,"u16VoltDCLinkRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0,   0 ,     65000};
+    variable_list[7]  = {7,"s16CurPhaseU",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[8]  = {8,"s16CurPhaseV",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[9]  = {9,"s16CurPhaseW",        0.0, "[A]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[10] = {10,"s16VoltPhaseU",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[11] = {11,"s16VoltPhaseV",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[12] = {12,"s16VoltPhaseW",      0.0, "[V]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[13] = {13,"s16CurDx",           0.0, "[A]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[14] = {14,"s16CurQx",           0.0, "[A]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[15] = {15,"s16VoltDx",          0.0, "[V]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[16] = {16,"s16VoltQx",          0.0, "[V]",      "uint16_t", 1000.0,    'f', 2,   -20,    20};
+    variable_list[17] = {17,"u16CurPhaseURaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0,   0,      65000};
+    variable_list[18] = {18,"u16CurPhaseVRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0,   0,      65000};
+    variable_list[19] = {19,"u16CurPhaseWRaw",    0.0, "[]",       "uint16_t", 1.0,       'f', 0,   0,      65000};
 }
 
 void MainWindow::addParameters()
@@ -176,16 +176,16 @@ void MainWindow::addParameters()
         parameter_list.append({i,"", 0.0, "", "", 0.0, 'f', 0, 0,0}); //, "", 0
     }
 
-    parameter_list[0]  = {0,"cs16SpeedRef_C",         0.0, "[]",       "uint8_t",  1.0, 'f', 2, -8000, 8000};
-    parameter_list[1]  = {1,"cu16SpeedCtrlKp_C",      0.0, "[°]",      "int16_t",  1000.0, 'f', 0, 5};
-    parameter_list[2]  = {2,"cu16SpeedGradient_C",    0.0, "[rpm]",    "uint16_t", 1.0, 'f', 2, 0, 5};
-    parameter_list[3]  = {3,"cu16OfsCurPhaseL1_C",    0.0, "[%]",      "uint16_t", 1.0, 'f', 2, 0, 65000};
-    parameter_list[4]  = {4,"cu16OfsCurPhaseL2_C",    0.0, "[%]",      "uint16_t", 1.0, 'f', 2, 0, 65000};
-    parameter_list[5]  = {5,"cu16OfsCurPhaseL3_C",    0.0, "[rpm]",    "uint16_t", 1.0, 'f', 2, 0, 65000};
-    parameter_list[6]  = {6,"cbStateEnaManVoltCtl_C", 0.0, "[]",       "uint16_t", 1.0, 'f', 2, 0, 1};
-    parameter_list[7]  = {7,"cf32VoltDxRefMan_C",     0.0, "[A]",      "uint16_t", 1.0, 'f', 2, -20, 20};
-    parameter_list[8]  = {8,"cf32VoltQxRefMan_C",     0.0, "[A]",      "uint16_t", 1.0, 'f', 2, -20, 20 };
-    parameter_list[9]  = {9,"cf32AngleOffset_C",      0.0, "[A]",      "uint16_t", 1.0, 'f', 2, 0, 360};
+    parameter_list[0]  = {0, "cs16SpeedRef_C",         0.0, "[]",       "uint8_t",  1.0, 'f', 2, -8000, 8000};
+    parameter_list[1]  = {1, "cu16SpeedCtrlKp_C",      0.0, "[°]",      "int16_t",  1000.0, 'f', 0, 5};
+    parameter_list[2]  = {2, "cu16SpeedGradient_C",    0.0, "[rpm]",    "uint16_t", 1.0, 'f', 2, 0, 5};
+    parameter_list[3]  = {3, "cu16OfsCurPhaseL1_C",    0.0, "[%]",      "uint16_t", 1.0, 'f', 2, 0, 65000};
+    parameter_list[4]  = {4, "cu16OfsCurPhaseL2_C",    0.0, "[%]",      "uint16_t", 1.0, 'f', 2, 0, 65000};
+    parameter_list[5]  = {5, "cu16OfsCurPhaseL3_C",    0.0, "[rpm]",    "uint16_t", 1.0, 'f', 2, 0, 65000};
+    parameter_list[6]  = {6, "cbStateEnaManVoltCtl_C", 0.0, "[]",       "uint16_t", 1.0, 'f', 2, 0, 1};
+    parameter_list[7]  = {7, "cf32VoltDxRefMan_C",     0.0, "[V]",      "uint16_t", 1000.0, 'f', 2, -20, 20};
+    parameter_list[8]  = {8, "cf32VoltQxRefMan_C",     0.0, "[V]",      "uint16_t", 1000.0, 'f', 2, -20, 20 };
+    parameter_list[9]  = {9, "cf32AngleOffset_C",      0.0, "[°]",      "uint16_t", 100.0, 'f', 2, 0, 360};
 }
 
 void MainWindow::load_a2l()

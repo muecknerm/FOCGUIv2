@@ -19,6 +19,7 @@ private:
     QList<qint16>   labels_id;
     serial_thread *port_parameter;
     QList<float> scaling_factor;
+    QList<data_type_variable> parameter_list_window;
 
 private slots:
     void on_button1_clicked();
